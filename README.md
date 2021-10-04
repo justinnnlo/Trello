@@ -35,3 +35,4 @@ The starting point of the application is the `/client/src/index.js` file. That's
 - If the item is inserted at the end of the list, the position becomes the previously-last item’s position plus 65536
 - If the item is inserted between two other items, the position becomes `(itemBefore.position + itemAfter.position) / 2`.
 - Positions are floats with a high precision (10 digits or so)
+# Trello
