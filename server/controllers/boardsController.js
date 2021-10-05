@@ -10,6 +10,20 @@ const getBoards = (req, res, next) => {
   });
 };
 
+const getSpecificBoard = (req, res, next) => {
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    const id = req.params.id;
+    Board.findById(id).then(board => {
+      response.json(board);
+    }).catch((err) => {
+      next(new HttpError("Server failed to retrieve board", 500));
+    });
+  } else {
+    return next(new HttpError("Invalid request to find board", 404));
+  }
+};
+
 const createBoard = (req, res, next) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
@@ -29,3 +43,4 @@ const createBoard = (req, res, next) => {
 
 exports.getBoards = getBoards;
 exports.createBoard = createBoard;
+exports.getSpecificBoard = getSpecificBoard;

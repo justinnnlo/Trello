@@ -9,6 +9,14 @@ export function fetchBoardsSuccess(boards) {
   return { type: types.FETCH_BOARDS_SUCCESS, boards };
 }
 
+export function getSpecificBoardRequest() {
+  return { type : types.GET_SPECIFIC_BOARD_REQUEST };
+}
+
+export function getSpecificBoardSuccess(board) {
+  return { type : types.GET_SPECIFIC_BOARD_SUCCESS, board};
+}
+
 export function createBoardRequest() {
   return { type: types.CREATE_BOARD_REQUEST };
 }
@@ -35,4 +43,17 @@ export function createBoard(board, callback) {
       }
     });
   };
+}
+
+export function getSpecificBoard(id, callback) {
+  return function(dispatch) {
+    dispatch(getSpecificBoardRequest());
+    apiClient.getSpecificBoard(id, data => {
+      dispatch(getSpecificBoardSuccess(data));
+
+      if (callback) {
+        callback(data);
+      }
+    });
+  }
 }
