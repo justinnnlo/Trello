@@ -20,7 +20,7 @@ const ListSchema = new Schema(
       required: true,
     },
     boardId: {
-      type: Number,
+      type: String,
       required: true,
     },
     position: {
