@@ -5,7 +5,7 @@ import { getSpecificBoard } from '../../actions/BoardActions';
 const BoardTile = (props) => {
   return (
     <li className="board-tile">
-      <Link to={`/api/boards/${props.id}`}>
+      <Link to={`/boards/${props.id}`}>
         <span className="board-title">{props.title}</span>
       </Link>
     </li>
