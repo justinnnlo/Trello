@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Board = require('./board');
+const Card = require('./card');
 
 /* 
 {
@@ -20,8 +22,8 @@ const ListSchema = new Schema(
       required: true,
     },
     boardId: {
-      type: String,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: 'Board',
     },
     position: {
       type: Number,
