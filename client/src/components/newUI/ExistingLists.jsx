@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import List from './List';
 
-const ExistingLists = () => {
-  const lists = useSelector((state) => state.lists);
+const ExistingLists = ({ boardId }) => {
+  const lists = useSelector((state) => state.lists.filter(list => list.boardId === boardId));
   return (
     <div id="list-container" className="list-container">
       <div id="existing-lists" className="existing-lists">
@@ -15,6 +15,16 @@ const ExistingLists = () => {
 };
 
 /*
+  listId: {
+    type: Schema.Types.ObjectId,
+    ref: 'List',
+  },
+  boardId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Board',
+  }, 
+/*
+
 <div id="new-list" className="new-list">
   <span>Add a list...</span>
   <input type="text" placeholder="Add a list..." />

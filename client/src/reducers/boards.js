@@ -9,7 +9,6 @@ export default function boards(state = [], action) {
     }
     case 'GET_SPECIFIC_BOARD_SUCCESS': {
       const { lists, ...boardOnly } = action.board;
-      console.log(action.board);
       return [boardOnly];
     }
 

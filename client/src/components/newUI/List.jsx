@@ -1,3 +1,5 @@
+import ExistingCards from './ExistingCards';
+
 const List = ({ list }) => {
   return (
     <div className="list-wrapper">
@@ -7,6 +9,7 @@ const List = ({ list }) => {
           <div>
             <p className="list-title">{list.title}</p>
           </div>
+          <ExistingCards listId={list._id} />
           <div className="add-dropdown add-top">
             <div className="card"></div>
             <a className="button">Add</a>

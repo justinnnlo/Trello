@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as boardActions from '../../actions/BoardActions';
 import ExistingLists from './ExistingLists';
 
-const Board = (props) => {
+const Board = () => {
   // const { url } = useRouteMatch();
   const dispatch = useDispatch();
   const boardId = useParams().id;
@@ -30,7 +30,7 @@ const Board = (props) => {
         </div>
       </header>
       <main>
-        <ExistingLists />
+        <ExistingLists boardId={boardId}/>
       </main>
     </>
   );
