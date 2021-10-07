@@ -1,6 +1,7 @@
 import ExistingCards from './ExistingCards';
 
 const List = ({ list }) => {
+  console.log(list);
   return (
     <div className="list-wrapper">
       <div className="list-background">
@@ -17,9 +18,6 @@ const List = ({ list }) => {
             <div className="add-options"></div>
             <span>...</span>
           </div>
-        </div>
-        <div className="add-card-toggle" data-position="bottom">
-          Add a card...
         </div>
       </div>
     </div>

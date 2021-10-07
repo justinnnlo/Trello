@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useRouteMatch, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import * as boardActions from '../../actions/BoardActions';
 import ExistingLists from './ExistingLists';
@@ -15,7 +15,7 @@ const Board = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <div>
       <header>
         <ul>
           <li id="title">{board.title}</li>
@@ -30,9 +30,9 @@ const Board = () => {
         </div>
       </header>
       <main>
-        <ExistingLists boardId={boardId}/>
+        <ExistingLists boardId={boardId} />
       </main>
-    </>
+    </div>
   );
 };
 
