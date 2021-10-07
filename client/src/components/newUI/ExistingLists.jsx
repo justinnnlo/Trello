@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import List from './List';
+import AddNewList from './AddNewList';
 
 const ExistingLists = ({ boardId }) => {
   const lists = useSelector((state) =>
@@ -12,14 +13,7 @@ const ExistingLists = ({ boardId }) => {
           <List key={list._id} list={list} />
         ))}
       </div>
-      <div id="new-list" className="new-list">
-        <span>Add a list...</span>
-        <input type="text" placeholder="Add a list..." />
-        <div>
-          <input type="submit" className="button" value="Save" />
-          <i className="x-icon icon"></i>
-        </div>
-      </div>
+      <AddNewList />
     </div>
   );
 };
