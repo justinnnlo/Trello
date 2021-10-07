@@ -19,25 +19,4 @@ const ExistingLists = () => {
   );
 };
 
-/*
-  listId: {
-    type: Schema.Types.ObjectId,
-    ref: 'List',
-  },
-  boardId: {
-    type: Schema.Types.ObjectId,
-    ref: 'Board',
-  }, 
-/*
-
-<div id="new-list" className="new-list">
-  <span>Add a list...</span>
-  <input type="text" placeholder="Add a list..." />
-  <div>
-    <input type="submit" className="button" value="Save" />
-    <i className="x-icon icon"></i>
-  </div>
-</div>
-*/
-
 export default ExistingLists;
