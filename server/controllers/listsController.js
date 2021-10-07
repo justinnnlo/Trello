@@ -1,6 +1,7 @@
 const List = require('../models/list');
+const Board = require('../models/board');
 const HttpError = require('../models/httpError');
-const { validateResult } = require('express-validator');
+const { validationResult } = require('express-validator');
 
 getLists = (req, res, next) => {
   List.find({}).then((lists) => {
@@ -9,22 +10,31 @@ getLists = (req, res, next) => {
 };
 
 createList = (req, res, next) => {
-  const errors = validateResult(req);
-  if (errors.empty()) {
+  const errors = validationResult(req);
+  console.log(` in create list~`);
+  if (errors.isEmpty()) {
     console.log('what is this in createList:', req.body);
+    const { title } = req.body.list;
+    const { boardId } = req.body;
+    console.log(title, boardId);
     const list = new List({
-      title: req.body.list.title,
-      boardId: req.body.boardId,
+      title: title,
+      boardId: boardId,
     });
-    list.save();
-    List.create(req.body.list)
+    list
+      .save()
       .then((list) => {
-        List.findById(list._id);
+        Board.findByIdAndUpdate(
+          boardId,
+          { $push: { lists: list._id } },
+          { new: true }
+        ).then((_) => res.json({ list }));
       })
-      .then((list) => res.json({ list }))
       .catch((err) => {
-        return next(err);
+        next(new HttpError('Creating list failed, please try again', 500));
       });
+  } else {
+    return next(HttpError('Input field is empty', 404));
   }
 };
 

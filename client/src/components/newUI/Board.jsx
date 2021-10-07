@@ -7,11 +7,13 @@ import ExistingLists from './ExistingLists';
 const Board = () => {
   const dispatch = useDispatch();
   const boardId = useParams().id;
-  const board = useSelector((state) => state.boards[0]);
+  const board = useSelector((state) =>
+    state.boards.filter((board) => board._id === boardId)
+  );
 
   useEffect(() => {
     dispatch(boardActions.getSpecificBoard(boardId));
-  }, [dispatch]);
+  }, [dispatch, boardId]);
 
   return (
     <div>
@@ -29,7 +31,7 @@ const Board = () => {
         </div>
       </header>
       <main>
-        <ExistingLists boardId={boardId} />
+        <ExistingLists />
       </main>
     </div>
   );
