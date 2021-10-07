@@ -1,14 +1,21 @@
+import { useState } from 'react';
 import ExistingCards from './ExistingCards';
 
 const List = ({ list }) => {
-  console.log(list);
+  const [title, setTitle] = useState(list.title);
+
   return (
     <div className="list-wrapper">
       <div className="list-background">
         <div className="list">
           <a className="more-icon sm-icon" href=""></a>
           <div>
-            <p className="list-title">{list.title}</p>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="list-title"
+            />
           </div>
           <ExistingCards listId={list._id} />
           <div className="add-dropdown add-top">
