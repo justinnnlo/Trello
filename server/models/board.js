@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+const List = require('./list');
 /*{
   "_id": 1,
   "title": "Web dev",

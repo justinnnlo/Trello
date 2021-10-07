@@ -39,7 +39,7 @@ const apiClient = {
       .then(unwrapData)
       .then(callback)
       .catch(logError);
-  }
+  },
 };
 
 export default apiClient;
