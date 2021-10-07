@@ -8,12 +8,11 @@ export default function boards(state = [], action) {
       return state.concat(newBoard);
     }
     case 'GET_SPECIFIC_BOARD_SUCCESS': {
-      // console.log('board in reducer:', action.board);
-      let boardCopy = { ...action.board };
-      delete boardCopy['lists'];
-      // console.log(boardCopy);
-      return boardCopy;
+      const { lists, ...boardOnly } = action.board;
+      console.log(action.board);
+      return [boardOnly];
     }
+
     default:
       return state;
   }

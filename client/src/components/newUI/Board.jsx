@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { useRouteMatch, useParams } from 'react-router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as boardActions from '../../actions/BoardActions';
+import ExistingLists from './ExistingLists';
 
 const Board = (props) => {
-  const { url } = useRouteMatch();
-  const boardId = useParams().id;
+  // const { url } = useRouteMatch();
   const dispatch = useDispatch();
+  const boardId = useParams().id;
+  const board = useSelector((state) => state.boards[0]);
 
   useEffect(() => {
     dispatch(boardActions.getSpecificBoard(boardId));
@@ -16,7 +18,7 @@ const Board = (props) => {
     <>
       <header>
         <ul>
-          <li id="title">{props.title}</li>
+          <li id="title">{board.title}</li>
           <li className="star-icon icon"></li>
           <li className="private private-icon icon">Private</li>
         </ul>
@@ -27,6 +29,9 @@ const Board = (props) => {
           <i className="sub-icon sm-icon"></i>Subscribed
         </div>
       </header>
+      <main>
+        <ExistingLists />
+      </main>
     </>
   );
 };

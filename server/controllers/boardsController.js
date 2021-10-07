@@ -13,7 +13,7 @@ const getBoards = (req, res, next) => {
 const getSpecificBoard = (req, res, next) => {
   const id = req.params.id;
   Board.findById(id)
-    .populate('list')
+    .populate({ path: 'lists', populate: { path: 'cards' } })
     .then((board) => {
       if (!board) {
         throw new HttpError(`board does not exist`, 404);
