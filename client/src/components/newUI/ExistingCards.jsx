@@ -17,10 +17,4 @@ const ExistingCards = ({ listId }) => {
   );
 };
 
-/*
-{cards.map((card) => (
-  <Card key={card._id} card={card} />
-))}
-*/
-
 export default ExistingCards;
