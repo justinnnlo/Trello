@@ -7,7 +7,7 @@ export function lists(state = [], action) {
       });
     }
     case 'CREATE_LIST_SUCCESS': {
-      const newList = action.payload;
+      const newList = action.list;
       return state.concat(newList);
     }
     default:

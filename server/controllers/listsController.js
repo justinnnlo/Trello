@@ -11,12 +11,9 @@ getLists = (req, res, next) => {
 
 createList = (req, res, next) => {
   const errors = validationResult(req);
-  console.log(` in create list~`);
   if (errors.isEmpty()) {
-    console.log('what is this in createList:', req.body);
     const { title } = req.body.list;
     const { boardId } = req.body;
-    console.log(title, boardId);
     const list = new List({
       title: title,
       boardId: boardId,
