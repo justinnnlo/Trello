@@ -1,0 +1,46 @@
+PUT http://localhost:3000/api/cards/615c93792a06210be388fb82 HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Complete Card",
+  "dueDate": "2021-12-12",
+  "labels": ["red", "purple"],
+  "description": "This is a card that has been completely filled out",
+  "listId": "615c8f03b55add0638dcaad8",
+  "boardId": "615c8939bef0d1fbeb668176",
+  "position": 65535.0,
+  "commentsCount": 0
+}
+
+# {
+#     title: {
+#       type: String,
+#       required: [true, 'The Card Title is required.'],
+#     },
+#     dueDate: {
+#       type: Date,
+#     },
+#     labels: [
+#       {
+#         type: String,
+#       },
+#     ],
+#     description: {
+#       type: String,
+#     },
+#     listId: {
+#       type: Schema.Types.ObjectId,
+#       ref: 'List',
+#     },
+#     boardId: {
+#       type: Schema.Types.ObjectId,
+#       ref: 'Board',
+#     },
+#     position: {
+#       type: Number,
+#     },
+#     commentsCount: {
+#       type: Number,
+#     },
+#   },
+#   { timestamps: true }

@@ -11,9 +11,28 @@ const createCard = (req, res, next) => {
 };
 
 const getCard = (req, res, next) => {
-  Card.findById(req.params.id).then((card) => res.json({ card }));
+  Card.findById(req.params.id)
+    .then((card) => {
+      if (!card) {
+        next(new HttpError('Could not find card', 404));
+      }
+      res.json({ card });
+    })
+    .catch((err) => next(new HttpError('Failed to get card', 500)));
+};
+
+const editCard = (req, res, next) => {
+  Card.findByIdAndUpdate(req.params.id, req.body)
+    .then((card) => {
+      if (!card) {
+        next(new HttpError('Could not find card', 404));
+      }
+      res.json({ card });
+    })
+    .catch((err) => next(new HttpError('Failed to edit card', 500)));
 };
 
 exports.getCards = getCards;
 exports.createCard = createCard;
 exports.getCard = getCard;
+exports.editCard = editCard;

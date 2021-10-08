@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 const CreateBoard = () => {
   return (
     <div className="popover new-board">

@@ -5,7 +5,7 @@ export function getCardSuccess(card) {
   return { type: types.GET_CARD_SUCCESS, card };
 }
 
-export function getCard(id) {
+export function getCard(id, callback) {
   return function (dispatch) {
     apiClient.getCard(id, (data) => {
       dispatch(getCardSuccess(data.card));
