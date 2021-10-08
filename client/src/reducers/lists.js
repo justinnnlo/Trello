@@ -10,6 +10,16 @@ export function lists(state = [], action) {
       const newList = action.list;
       return state.concat(newList);
     }
+    case 'EDIT_LIST_SUCCESS': {
+      const newList = action.list;
+      console.log(action);
+      return state.map((list) => {
+        if (list._id === newList._id) {
+          return newList;
+        }
+        return list;
+      });
+    }
     default:
       return state;
   }

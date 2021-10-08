@@ -7,10 +7,10 @@ const ExistingCards = ({ listId }) => {
   });
 
   return (
-    <div id="cards-container" data-id="list-1-cards">
+    <div id="cards-container">
       <div className="card-background">
         {listCards.map((card) => (
-          <Card key={card._id} {...card} />
+          <Card key={card._id} card={card} />
         ))}
       </div>
     </div>

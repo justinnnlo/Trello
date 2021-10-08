@@ -14,6 +14,7 @@ import LabelsPopover from './ui/LabelsPopover';
 import MoveCardPopover from './ui/MoveCardPopover';
 import SingleBoard from './ui/SingleBoard';
 import Board from './newUI/Board';
+import CardModal from './newUI/CardModal';
 
 const Application = () => {
   return (
@@ -35,7 +36,8 @@ const Application = () => {
       <Route path="/ui/moveCardPopover" component={MoveCardPopover} />
       <Route path="/ui/singleBoard" component={SingleBoard} />
 
-      <Route path="/boards/:id" component={Board} />
+      <Route path="/(boards|cards)/:id" component={Board} />
+      <Route path="/cards/:id" component={CardModal} />
     </div>
   );
 };

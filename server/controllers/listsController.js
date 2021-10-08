@@ -35,5 +35,18 @@ createList = (req, res, next) => {
   }
 };
 
-exports.createList = createList;
+editList = (req, res, next) => {
+  const id = req.params.id;
+  const list = req.body;
+  List.findByIdAndUpdate(id, list)
+    .then((_) => {
+      res.json({ list });
+    })
+    .catch((err) =>
+      next(new HttpError('Editing list failed, please try again', 500))
+    );
+};
+
 exports.getLists = getLists;
+exports.createList = createList;
+exports.editList = editList;
