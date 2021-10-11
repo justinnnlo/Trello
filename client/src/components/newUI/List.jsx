@@ -12,7 +12,7 @@ const List = ({ list }) => {
   const [addCard, setAddCard] = useState(false);
   const [cardTitle, setCardTitle] = useState('');
 
-  console.log(_id);
+  // console.log(_id);
 
   const handleClick = () => {
     setEdit(true);

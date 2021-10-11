@@ -6,9 +6,10 @@ import { dueClass, formatDueDate } from '../../lib/dateUtil';
 
 const CardModal = () => {
   const cardId = useParams().id;
-  const card = useSelector((state) =>
-    state.cards.find((card) => card._id === cardId)
-  );
+
+  useEffect(() => {
+    //dispatch getCard action
+  }, []);
 
   const {
     title,
@@ -88,8 +89,8 @@ const CardModal = () => {
                       className="checkbox"
                       checked=""
                     />
-                    {formattedDueDate}
-                    <span> ({pastDue})</span>
+                    {formattedDueDate ? formattedDueDate : 'none'}
+                    <span>{pastDue ? ` (${pastDue})` : ''}</span>
                   </div>
                 </li>
               </ul>
