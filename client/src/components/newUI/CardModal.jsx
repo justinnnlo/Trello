@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 
@@ -8,7 +8,6 @@ const CardModal = () => {
     state.cards.find((card) => card._id === cardId)
   );
 
-<<<<<<< HEAD
   const { title, description, dueDate, position, labels, commentsCount } = card;
 
   const dateArgs = dueDate
@@ -22,14 +21,6 @@ const CardModal = () => {
     });
 
   const formattedDate = new Date(...dateArgs).toDateString();
-  console.log(formattedDate);
-  // Sat Dec 11 2021
-=======
-  console.log(`card in modal:`, card);
-  const { title, description, dueDate, position, labels, commentsCount } = card;
-
-  const formattedDate = new Date(dueDate).toDateString();
->>>>>>> 6c68084924b990bd761e5b274790b6a60cd5943e
   const pastDue = new Date() > dueDate ? '(Past Due)' : '';
   //2021-12-12
 
