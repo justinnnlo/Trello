@@ -1,19 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 
 const CardModal = () => {
   const cardId = useParams().id;
-  console.log(`cardId ${cardId}`);
   const card = useSelector((state) =>
     state.cards.find((card) => card._id === cardId)
   );
 
-  console.log(`card in modal:`, card); // undefined
+  console.log(`card in modal:`, card);
   const { title, description, dueDate, position, labels, commentsCount } = card;
 
   const formattedDate = new Date(dueDate).toDateString();
-  const pastDue = new Date() > dueDate ? "(Past Due)" : "";
+  const pastDue = new Date() > dueDate ? '(Past Due)' : '';
   //2021-12-12
 
   // const [modal, setModal] = useState(true);
@@ -47,7 +46,8 @@ const CardModal = () => {
                     return (
                       <div className="member-container">
                         <div className={`${label} label colorblindable`}></div>
-                      </div>);
+                      </div>
+                    );
                   })}
                   {/* <div className="member-container">
                     <div className="green label colorblindable"></div>
