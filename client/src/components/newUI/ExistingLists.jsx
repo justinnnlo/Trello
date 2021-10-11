@@ -5,7 +5,6 @@ import AddNewList from './AddNewList';
 const ExistingLists = () => {
   // grab all the lists from state
   const lists = useSelector((state) => state.lists);
-  console.log('lists in existing lists:', lists);
 
   return (
     <div id="list-container" className="list-container">

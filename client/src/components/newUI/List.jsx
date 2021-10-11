@@ -42,9 +42,9 @@ const List = ({ list }) => {
   return (
     <div className="list-wrapper">
       <div className="list-background">
-        <div className="list" onClick={handleClick}>
+        <div className="list">
           <a className="more-icon sm-icon" href=""></a>
-          <div>
+          <div onClick={handleClick}>
             {edit ? (
               <input
                 type="text"

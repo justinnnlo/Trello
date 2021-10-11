@@ -4,16 +4,26 @@ import { useSelector } from 'react-redux';
 
 const CardModal = () => {
   const cardId = useParams().id;
-  console.log(`cardId ${cardId}`);
   const card = useSelector((state) =>
     state.cards.find((card) => card._id === cardId)
   );
 
-  console.log(`card in modal:`, card); // undefined
   const { title, description, dueDate, position, labels, commentsCount } = card;
 
-  const formattedDate = new Date(dueDate).toDateString();
-  const pastDue = new Date() > dueDate ? "(Past Due)" : "";
+  const dateArgs = dueDate
+    .split('T')[0]
+    .split('-')
+    .map((arg, idx) => {
+      if (idx === 1) {
+        return Number(arg) - 1;
+      }
+      return Number(arg);
+    });
+
+  const formattedDate = new Date(...dateArgs).toDateString();
+  console.log(formattedDate);
+  // Sat Dec 11 2021
+  const pastDue = new Date() > dueDate ? '(Past Due)' : '';
   //2021-12-12
 
   // const [modal, setModal] = useState(true);
@@ -47,7 +57,8 @@ const CardModal = () => {
                     return (
                       <div className="member-container">
                         <div className={`${label} label colorblindable`}></div>
-                      </div>);
+                      </div>
+                    );
                   })}
                   {/* <div className="member-container">
                     <div className="green label colorblindable"></div>
