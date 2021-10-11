@@ -1,12 +1,18 @@
-import { useState } from 'react';
+import { useState, us } from 'react';
 import { useDispatch } from 'react-redux';
 import { editList } from '../../actions/ListActions';
 import ExistingCards from './ExistingCards';
+import { createCard } from '../../actions/CardActions';
 
 const List = ({ list }) => {
   const dispatch = useDispatch();
+  const { _id, boardId } = list;
   const [title, setTitle] = useState(list.title);
   const [edit, setEdit] = useState(false);
+  const [addCard, setAddCard] = useState(false);
+  const [cardTitle, setCardTitle] = useState('');
+
+  console.log(_id);
 
   const handleClick = () => {
     setEdit(true);
@@ -39,8 +45,23 @@ const List = ({ list }) => {
     handleEdit();
   };
 
+  const handleAddCardClick = () => {
+    setAddCard(true);
+  };
+
+  const handleAddCardTextAreaChange = (e) => {
+    setCardTitle(e.target.value);
+  };
+
+  const handleAddCardSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createCard({ title: cardTitle, listId: _id, boardId }));
+    setCardTitle('');
+    setAddCard(false);
+  };
+
   return (
-    <div className="list-wrapper">
+    <div className={`list-wrapper ${addCard ? 'add-dropdown-active' : ''}`}>
       <div className="list-background">
         <div className="list">
           <a className="more-icon sm-icon" href=""></a>
@@ -60,15 +81,34 @@ const List = ({ list }) => {
               <p className="list-title">{title}</p>
             )}
           </div>
-          <ExistingCards listId={list._id} />
-          <div className="add-dropdown add-top">
-            <div className="card"></div>
-            <a className="button">Add</a>
+          <ExistingCards listId={_id} />
+          <div
+            className={`add-dropdown ${
+              addCard ? 'add-bottom active-card' : 'add-top'
+            }`}
+          >
+            <div className="card">
+              <div className="card-info"></div>
+              <textarea
+                name="add-card"
+                value={cardTitle}
+                onChange={handleAddCardTextAreaChange}
+              ></textarea>
+              <div className="members"></div>
+            </div>
+            <a className="button" type="submit" onClick={handleAddCardSubmit}>
+              Add
+            </a>
             <i className="x-icon icon"></i>
-            <div className="add-options"></div>
-            <span>...</span>
+            <div className="add-options">
+              <span>...</span>
+            </div>
           </div>
-          <div className="add-card-toggle" data-position="bottom">
+          <div
+            className="add-card-toggle"
+            data-position="bottom"
+            onClick={handleAddCardClick}
+          >
             Add a card...
           </div>
         </div>

@@ -59,7 +59,15 @@ const apiClient = {
       .get(routes.GET_CARD_URL + `/${id}`)
       .then(unwrapData)
       .then(callback)
-      .catch(logError)
+      .catch(logError);
+  },
+  createCard: function (card, callback) {
+    // console.log('card in create card:', card);
+    return axios
+      .post(routes.CREATE_CARD_URL, card)
+      .then(unwrapData)
+      .then(callback)
+      .catch(logError);
   },
 };
 

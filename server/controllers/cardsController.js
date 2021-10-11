@@ -1,4 +1,5 @@
 const Card = require('../models/card');
+const List = require('../models/list');
 const HttpError = require('../models/httpError');
 const { validationResult } = require('express-validator');
 
@@ -7,7 +8,23 @@ const getCards = (req, res, next) => {
 };
 
 const createCard = (req, res, next) => {
-  Card.create(req.body.card).then((card) => res.json({ card }));
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    const { title, listId } = req.body;
+    const card = new Card({
+      title,
+      listId,
+    });
+    card.save().then((card) => {
+      List.findByIdAndUpdate(
+        card.listId,
+        { $push: { cards: card._id } },
+        { new: true }
+      ).then((_) => res.json({ card }));
+    });
+  } else {
+    return next(HttpError('Missing required info', 400));
+  }
 };
 
 const getCard = (req, res, next) => {

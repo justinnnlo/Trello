@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { dueClass, formatDueDate } from '../../lib/dateUtil';
 
 const CardModal = () => {
   const cardId = useParams().id;
@@ -19,23 +20,12 @@ const CardModal = () => {
     boardId,
   } = card;
 
-  const dateArgs = dueDate
-    .split('T')[0]
-    .split('-')
-    .map((arg, idx) => {
-      if (idx === 1) {
-        return Number(arg) - 1;
-      }
-      return Number(arg);
-    });
+  let formattedDueDate, pastDue;
 
-  const formattedDate = new Date(...dateArgs).toDateString();
-  const pastDue = new Date() > dueDate ? '(Past Due)' : '';
-  //2021-12-12
-
-  // const handleClick = () => {
-  //   setModal(false);
-  // };
+  if (dueDate) {
+    formattedDueDate = formatDueDate(dueDate);
+    pastDue = dueClass(card);
+  }
 
   return (
     <div id="modal-container">
@@ -98,8 +88,8 @@ const CardModal = () => {
                       className="checkbox"
                       checked=""
                     />
-                    {formattedDate}
-                    <span>{pastDue}</span>
+                    {formattedDueDate}
+                    <span> ({pastDue})</span>
                   </div>
                 </li>
               </ul>

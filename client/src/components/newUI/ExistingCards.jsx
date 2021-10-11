@@ -3,6 +3,7 @@ import Card from './Card';
 
 const ExistingCards = ({ listId }) => {
   const listCards = useSelector((state) => {
+    console.log(state.cards);
     return state.cards.filter((card) => card.listId === listId);
   });
 
