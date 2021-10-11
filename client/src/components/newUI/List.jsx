@@ -35,7 +35,7 @@ const List = ({ list }) => {
     }
   };
 
-  const handleBlur = (e) => {
+  const handleBlur = () => {
     handleEdit();
   };
 

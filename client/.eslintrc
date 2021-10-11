@@ -2,7 +2,8 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:react/jsx-runtime"
   ],
   "rules": {
     "jsx-a11y/anchor-is-valid": "off",
@@ -13,11 +14,7 @@
     "no-console": "warn"
   },
   "parser": "babel-eslint",
-  "plugins": [
-    "react",
-    "import",
-    "react-hooks"
-  ],
+  "plugins": ["react", "import", "react-hooks"],
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module",
@@ -33,12 +30,7 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".ts",
-          ".tsx"
-        ]
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     },
     "react": {
