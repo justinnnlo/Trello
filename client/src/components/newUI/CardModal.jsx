@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const CardModal = () => {
@@ -8,7 +9,15 @@ const CardModal = () => {
     state.cards.find((card) => card._id === cardId)
   );
 
-  const { title, description, dueDate, position, labels, commentsCount } = card;
+  const {
+    title,
+    description,
+    dueDate,
+    position,
+    labels,
+    commentsCount,
+    boardId,
+  } = card;
 
   const dateArgs = dueDate
     .split('T')[0]
@@ -24,8 +33,6 @@ const CardModal = () => {
   const pastDue = new Date() > dueDate ? '(Past Due)' : '';
   //2021-12-12
 
-  // const [modal, setModal] = useState(true);
-
   // const handleClick = () => {
   //   setModal(false);
   // };
@@ -34,7 +41,9 @@ const CardModal = () => {
     <div id="modal-container">
       <div className="screen"></div>
       <div id="modal">
-        <i className="x-icon icon close-modal"></i>
+        <Link to={`/boards/${boardId}`}>
+          <i className="x-icon icon close-modal"></i>
+        </Link>
         <header>
           <i className="card-icon icon .close-modal"></i>
           <textarea className="list-title" style={{ height: '45px' }}>
