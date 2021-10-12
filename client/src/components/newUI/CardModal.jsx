@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { dueClass, formatDueDate } from '../../lib/dateUtil';
 import * as cardActions from '../../actions/CardActions';
+import * as boardActions from '../../actions/BoardActions';
 
 const CardModal = () => {
   const dispatch = useDispatch();

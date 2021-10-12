@@ -8,7 +8,25 @@ const Board = () => {
   const dispatch = useDispatch();
   //if current id in path is card id,
   // then we need to get the board id from the card in the state
-  const boardId = useParams().id;
+  const idType = useParams()[0];
+  console.log(idType);
+
+  const urlId = useParams().id;
+
+  let boardId;
+  let card;
+  const cards = useSelector(state => state.cards);
+
+  if (idType === 'boards') {
+    boardId = urlId;
+  } else {
+    card = cards.find(c => c._id === urlId);
+    if (card) {
+      boardId = card.boardId
+    }
+  }
+
+
   const board = useSelector((state) =>
     state.boards.filter((board) => board._id === boardId)
   );
