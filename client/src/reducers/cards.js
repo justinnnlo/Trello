@@ -4,6 +4,8 @@ export function cards(state = [], action) {
       return action.board.lists.map((list) => list.cards).flat();
     case 'CREATE_CARD_SUCCESS':
       return state.concat(action.card);
+    case 'GET_CARD_SUCCESS':
+      return [action.card];
     default:
       return state;
   }

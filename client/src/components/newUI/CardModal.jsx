@@ -1,15 +1,25 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { dueClass, formatDueDate } from '../../lib/dateUtil';
+import * as cardActions from '../../actions/CardActions';
 
 const CardModal = () => {
+  const dispatch = useDispatch();
   const cardId = useParams().id;
+
+  const card = useSelector((state) => {
+    return state.cards.find((card) => card._id === cardId);
+  });
 
   useEffect(() => {
     //dispatch getCard action
-  }, []);
+    dispatch(cardActions.getCard(cardId));
+  }, [cardId]);
+
+  // need to have this guard because of the lag in async action to fetch the card again after refresh
+  if (!card) return null;
 
   const {
     title,
