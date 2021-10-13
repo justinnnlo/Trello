@@ -10,10 +10,11 @@ const getCards = (req, res, next) => {
 const createCard = (req, res, next) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
-    const { title, listId } = req.body;
+    const { title, listId, boardId } = req.body;
     const card = new Card({
       title,
       listId,
+      boardId,
     });
     card.save().then((card) => {
       List.findByIdAndUpdate(
