@@ -6,28 +6,22 @@ import ExistingLists from './ExistingLists';
 
 const Board = () => {
   const dispatch = useDispatch();
-  //if current id in path is card id,
-  // then we need to get the board id from the card in the state
   const idType = useParams()[0];
-
   const urlId = useParams().id;
-
   let boardId;
   let card;
-  const cards = useSelector(state => state.cards);
+  const cards = useSelector((state) => state.cards);
 
   if (idType === 'boards') {
     
     boardId = urlId;
   } else {
-    card = cards.find(c => c._id === urlId);
-    console.log(boardId);
+    card = cards.find((c) => c._id === urlId);
     if (card) {
-      boardId = card.boardId
+      boardId = card.boardId;
     }
   }
 
-  
   const board = useSelector((state) =>
     state.boards.filter((board) => board._id === boardId)
   );
