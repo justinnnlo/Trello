@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { dueClass, formatDueDate } from '../../lib/dateUtil';
 import * as cardActions from '../../actions/CardActions';
 import EditableTitle from './EditableTitle';
+import EditableDescription from './EditableDescription';
 
 const CardModal = () => {
   const dispatch = useDispatch();
@@ -66,27 +67,6 @@ const CardModal = () => {
                       </div>
                     );
                   })}
-                  {/* <div className="member-container">
-                    <div className="green label colorblindable"></div>
-                  </div>
-                  <div className="member-container">
-                    <div className="yellow label colorblindable"></div>
-                  </div>
-                  <div className="member-container">
-                    <div className="orange label colorblindable"></div>
-                  </div>
-                  <div className="member-container">
-                    <div className="blue label colorblindable"></div>
-                  </div>
-                  <div className="member-container">
-                    <div className="purple label colorblindable"></div>
-                  </div>
-                  <div className="member-container">
-                    <div className="red label colorblindable"></div>
-                  </div>
-                  <div className="member-container">
-                    <i className="plus-icon sm-icon"></i>
-                  </div> */}
                 </li>
                 <li className="due-date-section">
                   <h3>Due Date</h3>
@@ -102,18 +82,7 @@ const CardModal = () => {
                   </div>
                 </li>
               </ul>
-              <form className="description">
-                <p>Description</p>
-                <span id="description-edit" className="link">
-                  Edit
-                </span>
-                <p className="textarea-overlay">{description}</p>
-                <p id="description-edit-options" className="hidden">
-                  You have unsaved edits on this field.{' '}
-                  <span className="link">View edits</span> -{' '}
-                  <span className="link">Discard</span>
-                </p>
-              </form>
+              <EditableDescription description={description} card={card} />
             </li>
             <li className="comment-section">
               <h2 className="comment-icon icon">Add Comment</h2>
