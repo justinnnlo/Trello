@@ -37,7 +37,6 @@ export function createList(title, boardId, callback) {
 export function editList(list, callback) {
   return function (dispatch) {
     apiClient.editList(list, (data) => {
-      console.log(data);
       dispatch(editListSuccess(data.list));
       if (callback) callback();
     });

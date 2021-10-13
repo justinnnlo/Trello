@@ -40,7 +40,7 @@ const getCard = (req, res, next) => {
 };
 
 const editCard = (req, res, next) => {
-  Card.findByIdAndUpdate(req.params.id, req.body)
+  Card.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((card) => {
       if (!card) {
         next(new HttpError('Could not find card', 404));

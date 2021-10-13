@@ -66,9 +66,15 @@ const apiClient = {
       .catch(logError);
   },
   createCard: function (card, callback) {
-    // console.log('card in create card:', card);
     return client
       .post(routes.CREATE_CARD_URL, card)
+      .then(unwrapData)
+      .then(callback)
+      .catch(logError);
+  },
+  editCard: function (card, callback) {
+    return client
+      .put(routes.EDIT_CARD_URL + `/${card._id}`, card)
       .then(unwrapData)
       .then(callback)
       .catch(logError);

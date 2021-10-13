@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { dueClass, formatDueDate } from '../../lib/dateUtil';
 import * as cardActions from '../../actions/CardActions';
+import EditableTitle from './EditableTitle';
 
 const CardModal = () => {
   const dispatch = useDispatch();
@@ -46,9 +47,7 @@ const CardModal = () => {
         </Link>
         <header>
           <i className="card-icon icon .close-modal"></i>
-          <textarea className="list-title" style={{ height: '45px' }}>
-            {title}
-          </textarea>
+          <EditableTitle card={card} />
           <p>
             in list <a className="link">Stuff to try (this is a list)</a>
             <i className="sub-icon sm-icon"></i>
