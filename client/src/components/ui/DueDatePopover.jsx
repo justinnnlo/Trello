@@ -13,7 +13,9 @@ const DueDatePopover = ({ card, toggleEdit }) => {
       : moment().add(1, 'day').format(dt.DATE_STRING)
   );
   const [time, setTime] = useState(
-    card.dueDate ? moment(card.dueDate).format(dt.TIME_STRING) : dt.DEFAULT_TIME_STRING
+    card.dueDate
+      ? moment(card.dueDate).format(dt.TIME_STRING)
+      : dt.DEFAULT_TIME_STRING
   );
 
   useEffect(() => {
@@ -89,6 +91,7 @@ const DueDatePopover = ({ card, toggleEdit }) => {
 
   const handleTimeChange = ({ target }) => {
     const newTime = target.value;
+    console.log(date);
     setTime(newTime);
   };
 

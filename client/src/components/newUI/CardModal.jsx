@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,6 +10,7 @@ import EditableDate from './EditableDate';
 const CardModal = () => {
   const dispatch = useDispatch();
   const cardId = useParams().id;
+  const [archived, setArchived] = useState(false);
 
   const card = useSelector((state) => {
     return state.cards.find((card) => card._id === cardId);
@@ -18,6 +19,10 @@ const CardModal = () => {
   useEffect(() => {
     dispatch(cardActions.getCard(cardId));
   }, [dispatch, cardId]);
+
+  const toggleArchived = () => {
+    setArchived(!archived);
+  };
 
   // need to have this guard because of the lag in async action to fetch the card again after refresh
   if (!card) return null;
@@ -39,6 +44,11 @@ const CardModal = () => {
         <Link to={`/boards/${boardId}`}>
           <i className="x-icon icon close-modal"></i>
         </Link>
+        {archived ? (
+          <div className="archived-banner">
+            <i className="file-icon icon"></i>This card is archived.
+          </div>
+        ) : null}
         <header>
           <i className="card-icon icon .close-modal"></i>
           <EditableTitle card={card} />
@@ -203,22 +213,45 @@ const CardModal = () => {
             </li>
           </ul>
           <h2>Actions</h2>
-          <ul>
-            <li className="move-button">
-              <i className="forward-icon sm-icon"></i>Move
-            </li>
-            <li className="copy-button">
-              <i className="card-icon sm-icon"></i>Copy
-            </li>
-            <li className="subscribe-button">
-              <i className="sub-icon sm-icon"></i>Subscribe
-              <i className="check-icon sm-icon"></i>
-            </li>
-            <hr />
-            <li className="archive-button">
-              <i className="file-icon sm-icon "></i>Archive
-            </li>
-          </ul>
+          {archived ? (
+            <ul>
+              <li className="move-button">
+                <i className="forward-icon sm-icon"></i>Move
+              </li>
+              <li className="copy-button">
+                <i className="card-icon sm-icon"></i>Copy
+              </li>
+              <li className="subscribe-button">
+                <i className="sub-icon sm-icon"></i>Subscribe
+                <i className="check-icon sm-icon"></i>
+              </li>
+              <hr />
+              <li className="unarchive-button" onClick={toggleArchived}>
+                <i className="send-icon sm-icon"></i>Send to board
+              </li>
+              <li className="red-button">
+                <i className="minus-icon sm-icon"></i>Delete
+              </li>
+            </ul>
+          ) : (
+            <ul>
+              <li className="move-button">
+                <i className="forward-icon sm-icon"></i>Move
+              </li>
+              <li className="copy-button">
+                <i className="card-icon sm-icon"></i>Copy
+              </li>
+              <li className="subscribe-button">
+                <i className="sub-icon sm-icon"></i>Subscribe
+                <i className="check-icon sm-icon"></i>
+              </li>
+              <hr />
+              <li className="archive-button" onClick={toggleArchived}>
+                <i className="file-icon sm-icon "></i>Archive
+              </li>
+            </ul>
+          )}
+
           <ul className="light-list">
             <li className="not-implemented">Share and more...</li>
           </ul>
