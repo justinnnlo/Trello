@@ -8,3 +8,5 @@ export const EDIT_LIST_URL = '/api/lists';
 export const GET_CARD_URL = '/api/cards';
 export const CREATE_CARD_URL = '/api/cards';
 export const EDIT_CARD_URL = '/api/cards';
+
+export const DELETE_CARD_URL = '/api/cards';

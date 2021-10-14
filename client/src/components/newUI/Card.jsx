@@ -6,6 +6,7 @@ const Card = ({ card }) => {
   const dispatch = useDispatch();
 
   const { title, _id } = card;
+
   const handleClick = () => {
     dispatch(cardActions.getCard(_id));
   };

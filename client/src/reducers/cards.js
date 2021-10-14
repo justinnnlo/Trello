@@ -17,6 +17,9 @@ export function cards(state = [], action) {
         }
         return card;
       });
+    case 'DELETE_CARD_SUCCESS':
+      console.log('what is id here:', action.id);
+      return state.filter((card) => card._id !== action.id);
     default:
       return state;
   }

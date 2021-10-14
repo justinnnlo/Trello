@@ -24,6 +24,10 @@ const CardModal = () => {
     setArchived(!archived);
   };
 
+  const handleDelete = () => {
+    dispatch(cardActions.deleteCard(cardId));
+  };
+
   // need to have this guard because of the lag in async action to fetch the card again after refresh
   if (!card) return null;
 
@@ -229,7 +233,7 @@ const CardModal = () => {
               <li className="unarchive-button" onClick={toggleArchived}>
                 <i className="send-icon sm-icon"></i>Send to board
               </li>
-              <li className="red-button">
+              <li className="red-button" onClick={handleDelete}>
                 <i className="minus-icon sm-icon"></i>Delete
               </li>
             </ul>

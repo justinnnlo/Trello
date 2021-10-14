@@ -50,7 +50,18 @@ const editCard = (req, res, next) => {
     .catch((err) => next(new HttpError('Failed to edit card', 500)));
 };
 
+const deleteCard = (req, res, next) => {
+  Card.findByIdAndDelete(req.params.id, (err, docs) => {
+    if (err) {
+      next(new HttpError('Could not find card to delete', 404));
+    } else {
+      res.json({ docs });
+    }
+  }).catch((err) => next(new HttpError('Failed to delete card', 500)));
+};
+
 exports.getCards = getCards;
 exports.createCard = createCard;
 exports.getCard = getCard;
 exports.editCard = editCard;
+exports.deleteCard = deleteCard;

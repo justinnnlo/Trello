@@ -13,6 +13,10 @@ export function editCardSuccess(card) {
   return { type: types.EDIT_CARD_SUCCESS, card };
 }
 
+export function deleteCardSuccess(id) {
+  return { type: types.DELETE_CARD_SUCCESS, id };
+}
+
 export function createCard(card) {
   return function (dispatch) {
     apiClient.createCard(card, () => {
@@ -35,6 +39,14 @@ export function editCard(card, callback) {
     apiClient.editCard(card, (data) => {
       dispatch(editCardSuccess(data.card));
       if (callback) callback();
+    });
+  };
+}
+
+export function deleteCard(id) {
+  return function (dispatch) {
+    apiClient.deleteCard(id, () => {
+      dispatch(deleteCardSuccess(id));
     });
   };
 }

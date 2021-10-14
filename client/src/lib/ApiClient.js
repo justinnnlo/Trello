@@ -79,6 +79,13 @@ const apiClient = {
       .then(callback)
       .catch(logError);
   },
+  deleteCard: function (id, callback) {
+    return client
+      .delete(routes.DELETE_CARD_URL + `/${id}`)
+      .then(unwrapData)
+      .then(callback)
+      .catch(logError);
+  },
 };
 
 export default apiClient;
