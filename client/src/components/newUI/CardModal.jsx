@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { dueClass, formatDueDate } from '../../lib/dateUtil';
 import * as cardActions from '../../actions/CardActions';
 import EditableTitle from './EditableTitle';
 import EditableDescription from './EditableDescription';
+import EditableDate from './EditableDate';
 
 const CardModal = () => {
   const dispatch = useDispatch();
@@ -31,13 +31,6 @@ const CardModal = () => {
     commentsCount,
     boardId,
   } = card;
-
-  let formattedDueDate, pastDue;
-
-  if (dueDate) {
-    formattedDueDate = formatDueDate(dueDate);
-    pastDue = dueClass(card);
-  }
 
   return (
     <div id="modal-container">
@@ -68,19 +61,7 @@ const CardModal = () => {
                     );
                   })}
                 </li>
-                <li className="due-date-section">
-                  <h3>Due Date</h3>
-                  <div id="dueDateDisplay" className="overdue completed">
-                    <input
-                      id="dueDateCheckbox"
-                      type="checkbox"
-                      className="checkbox"
-                      checked=""
-                    />
-                    {formattedDueDate ? formattedDueDate : 'none'}
-                    <span>{pastDue ? ` (${pastDue})` : ''}</span>
-                  </div>
-                </li>
+                <EditableDate card={card} />
               </ul>
               <EditableDescription description={description} card={card} />
             </li>
