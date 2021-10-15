@@ -1,11 +1,49 @@
-import React from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { LABELS } from '../../constants/Labels';
+import * as cardActions from '../../actions/CardActions';
+import Label from '../newUI/Label';
+
 const LabelsPopover = () => {
+  const dispatch = useDispatch();
+  const cardId = useParams().id;
+  const card = useSelector((state) =>
+    state.cards.find((card) => card._id === cardId)
+  );
+
+  const [selectedLabels, setSelectedLabels] = useState(card ? card.labels : []);
+  const [colorblindable, setColorblindable] = useState(false);
+
+  useEffect(() => {
+    dispatch(cardActions.getCard(cardId));
+  }, [dispatch, cardId]);
+
+  if (!card) return null;
+
+  const handleSelect = ({ target }) => {
+    const selected = target.classList.value;
+    let newSelectedLabels;
+    if (selectedLabels.includes(selected)) {
+      newSelectedLabels = selectedLabels.filter((label) => label !== selected);
+    } else {
+      newSelectedLabels = selectedLabels.concat(selected);
+    }
+    setSelectedLabels(newSelectedLabels);
+    dispatch(cardActions.editCard({ ...card, labels: newSelectedLabels }));
+  };
+
+  const toggleColorblind = () => {
+    setColorblindable(!colorblindable);
+  };
+
   return (
     <div className="popover labels">
       <div id="add-options-labels-dropdown">
         <header>
           <span>Labels</span>
-          <a href="#" className="icon-sm icon-close"></a>
+          <Link to={`/cards/${cardId}`} className="icon-sm icon-close"></Link>
         </header>
         <div className="content">
           <input
@@ -14,61 +52,24 @@ const LabelsPopover = () => {
             type="text"
           />
           <div className="labels-search-results">
-            <ul className="label-list">
-              <li>
-                <div className="green colorblindable" data-id="1">
-                  <i className="check-icon sm-icon"></i>
-                </div>
-                <div className="label-background green"></div>
-                <div className="label-background-overlay"></div>
-                <i className="edit-icon icon not-implemented"></i>
-              </li>
-              <li>
-                <div className="yellow colorblindable" data-id="2">
-                  <i className="check-icon sm-icon"></i>
-                </div>
-                <div className="label-background yellow"></div>
-                <div className="label-background-overlay"></div>
-                <i className="edit-icon icon not-implemented"></i>
-              </li>
-              <li>
-                <div className="orange colorblindable" data-id="3">
-                  <i className="check-icon sm-icon"></i>
-                </div>
-                <div className="label-background orange"></div>
-                <div className="label-background-overlay"></div>
-                <i className="edit-icon icon not-implemented"></i>
-              </li>
-              <li>
-                <div className="red colorblindable" data-id="4">
-                  <i className="check-icon sm-icon"></i>
-                </div>
-                <div className="label-background red"></div>
-                <div className="label-background-overlay"></div>
-                <i className="edit-icon icon not-implemented"></i>
-              </li>
-              <li>
-                <div className="purple colorblindable" data-id="5">
-                  <i className="check-icon sm-icon"></i>
-                </div>
-                <div className="label-background purple"></div>
-                <div className="label-background-overlay"></div>
-                <i className="edit-icon icon not-implemented"></i>
-              </li>
-              <li>
-                <div className="blue colorblindable" data-id="6">
-                  <i className="check-icon sm-icon"></i>
-                </div>
-                <div className="label-background blue"></div>
-                <div className="label-background-overlay"></div>
-                <i className="edit-icon icon not-implemented"></i>
-              </li>
+            <ul className="label-list" onClick={handleSelect}>
+              {LABELS.map((label) => {
+                return (
+                  <Label
+                    key={label}
+                    color={label}
+                    colorblindable={colorblindable}
+                    card={card}
+                  />
+                );
+              })}
             </ul>
             <ul className="light-list">
               <li className="not-implemented">Create a new label</li>
               <hr />
-              <li className="toggleColorblind">
-                Enable color blind friendly mode.
+              <li className="toggleColorblind" onClick={toggleColorblind}>
+                {colorblindable ? 'Disable' : 'Enable'} color blind friendly
+                mode.
               </li>
             </ul>
           </div>

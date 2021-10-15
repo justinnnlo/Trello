@@ -74,6 +74,11 @@ const CardModal = () => {
                       </div>
                     );
                   })}
+                  <Link to={`/cards/${cardId}/labels`}>
+                    <div className="member-container">
+                      <i className="plus-icon sm-icon"></i>
+                    </div>
+                  </Link>
                 </li>
                 <EditableDate card={card} />
               </ul>
